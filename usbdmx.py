@@ -29,10 +29,13 @@ POSSIBILITY OF SUCH DAMAGE.
 
 import ctypes
 
+import inspect, os
+path = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) # script directory
+
 try:
-    _usbdmx = ctypes.cdll.LoadLibrary("./libusbdmx.so")
+    _usbdmx = ctypes.cdll.LoadLibrary(path + "/libusbdmx.so")
 except OSError:
-    _usbdmx = ctypes.cdll.LoadLibrary("./libusbdmx.dylib")
+    _usbdmx = ctypes.cdll.LoadLibrary(path + "/libusbdmx.dylib")
 
 
 def scan():
